@@ -1,0 +1,2 @@
+# why would they be? why did upstream put a shebang at the start?
+ts-node: script-not-executable usr/share/nodejs/ts-node/*.ts

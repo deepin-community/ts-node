@@ -1,0 +1,45 @@
+Source: ts-node
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Julien Puydt <jpuydt@debian.org>
+Build-Depends: chai
+ , debhelper-compat (= 13)
+ , dh-sequence-nodejs
+ , mocha <!nocheck>
+ , node-arg <!nocheck>
+ , node-axios <!nocheck>
+ , node-create-require <!nocheck>
+ , node-es-abstract <!nocheck>
+ , node-json-stable-stringify
+ , node-make-error <!nocheck>
+ , node-proxyquire <!nocheck>
+ , node-react <!nocheck>
+ , node-rimraf <!nocheck>
+ , node-semver
+ , node-source-map-support <!nocheck>
+ , node-typescript
+ , node-typescript-types
+ , node-yn <!nocheck>
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/js-team/ts-node
+Vcs-Git: https://salsa.debian.org/js-team/ts-node.git
+Homepage: https://github.com/TypeStrong/ts-node
+Testsuite: autopkgtest-pkg-nodejs
+Rules-Requires-Root: no
+
+Package: ts-node
+Architecture: all
+Depends: ${misc:Depends}
+ , node-arg
+ , node-create-require
+ , node-diff
+ , node-make-error
+ , node-source-map-support
+ , node-yn
+ , nodejs
+Provides: ${nodejs:Provides}
+Multi-Arch: foreign
+Description: TypeScript execution and language shell
+ Provides a command-line interface to execute TypeScript code
+ as a shell and an interactive read-eval-print-loop (REPL).

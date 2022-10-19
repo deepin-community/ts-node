@@ -1,0 +1,4 @@
+# I have no idea why lintian things it's not source...
+# it looks like legit JavaScript code to me (jpuydt).
+ts-node source: source-is-missing scripts/build-pack.js
+ts-node source: source-contains-prebuilt-javascript-object scripts/build-pack.js

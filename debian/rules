@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	tsc
+	rm dist/*deprecated*
+	chmod +x dist/bin*.js
+#	./debian/tests/test_modules/typescript-json-schema/bin/typescript-json-schema \
+		--topRef --refs --validationKeywords allOf \
+		--out tsconfig.schema.json tsconfig.json TsConfigSchema
+	node --require ./register ./scripts/create-merged-schema
+	chmod +x dist/bin.js
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod +x `find debian -name "bin*.js"`

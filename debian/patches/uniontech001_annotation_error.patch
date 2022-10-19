@@ -1,0 +1,15 @@
+#Author: renyehui <renyehui@uniontech.com>  
+#Date: Tue, 14 Jun 2022 14:19:16 +0800
+#Subject: Annotation error
+
+diff -Naur ts-node/src/repl.ts ts-node-ch/src/repl.ts
+--- a/src/repl.ts	2022-06-14 14:07:38.988767930 +0800
++++ b/src/repl.ts	2022-06-14 14:11:04.355114124 +0800
+@@ -98,6 +98,7 @@
+           console.error(error)
+         }
+       } else {
++        // @ts-ignore
+         err = error
+       }
+     }

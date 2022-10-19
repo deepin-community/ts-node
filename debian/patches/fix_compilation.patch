@@ -1,0 +1,47 @@
+Description: allow compilation with Debian tools
+Author: Julien Puydt
+Forwarded: Debian-specific
+
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -12,6 +12,25 @@
+     "sourceMap": true,
+     "inlineSources": true,
+     "types": ["node", "mocha"],
++    "typeRoots": ["/usr/share/nodejs/@types"],
++    "baseUrl": ".",
++    "paths": {
++	    "arg": ["/usr/share/nodejs/arg"],
++	    "chai": ["/usr/share/nodejs/@types/chai"],
++	    "create-require": ["/usr/share/nodejs/create-require"],
++	    "diff": ["/usr/share/nodejs/@types/diff"],
++	    "get-stream": ["/usr/share/nodejs/get-stream"],
++	    "glob": ["/usr/share/nodejs/@types/glob"],
++	    "make-error": ["/usr/share/nodejs/make-error"],
++	    "minimatch": ["/usr/share/nodejs/@types/minimatch"],
++	    "proxyquire": ["/usr/share/nodejs/proxyquire"],
++	    "rimraf": ["/usr/share/nodejs/@types/rimraf"],
++	    "semver": ["/usr/share/nodejs/@types/semver"],
++	    "source-map": ["/usr/share/nodejs/source-map"],
++	    "source-map-support": ["/usr/share/nodejs/source-map-support"],
++	    "typescript": ["/usr/share/nodejs/typescript"],
++	    "yn": ["/usr/share/nodejs/yn"]
++    },
+     "stripInternal": true
+   },
+   "include": [
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -5,10 +5,10 @@
+ import * as util from 'util'
+ import { fileURLToPath } from 'url'
+ import type * as _ts from 'typescript'
+-import { Module, createRequire as nodeCreateRequire, createRequireFromPath as nodeCreateRequireFromPath } from 'module'
++import Module = require('module')
+ import type _createRequire from 'create-require'
+ // tslint:disable-next-line
+-const createRequire = nodeCreateRequire ?? nodeCreateRequireFromPath ?? require('create-require') as typeof _createRequire
++const createRequire = require('create-require') as typeof _createRequire
+ 
+ export { createRepl, CreateReplOptions, ReplService } from './repl'
+ 

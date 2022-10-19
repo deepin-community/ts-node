@@ -1,0 +1,74 @@
+.TH TS-NODE "1" "November 2020" "ts-node v9.0.0" "User Commands"
+.SH NAME
+ts-node \- execute JavaScript and TypeScript code
+.SH SYNOPSIS
+\fBts\-node [\fIoptions] [\fB-e \fIscript] [arguments]
+
+.SH DESCRIPTION
+Runs the given script, either in a file or inlined
+with the \fB-e\fR switch, using Node.js or TypeScript.
+.TP
+\fB\-e\fR, \fB\-\-eval\fR [code]
+Evaluate code
+.TP
+\fB\-p\fR, \fB\-\-print\fR
+Print result of `\-\-eval`
+.TP
+\fB\-r\fR, \fB\-\-require\fR [path]
+Require a node module before execution
+.TP
+\fB\-i\fR, \fB\-\-interactive\fR
+Opens the REPL even if stdin does not appear to be a terminal
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print CLI usage
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Print module version information
+.TP
+\fB\-s\fR, \fB\-\-script\-mode\fR
+Use cwd from <script.ts> instead of current directory
+.TP
+\fB\-T\fR, \fB\-\-transpile\-only\fR
+Use TypeScript's faster `transpileModule`
+.TP
+\fB\-H\fR, \fB\-\-compiler\-host\fR
+Use TypeScript's compiler host API
+.TP
+\fB\-I\fR, \fB\-\-ignore\fR [pattern]
+Override the path patterns to skip compilation
+.TP
+\fB\-P\fR, \fB\-\-project\fR [path]
+Path to TypeScript JSON project file
+.TP
+\fB\-C\fR, \fB\-\-compiler\fR [name]
+Specify a custom TypeScript compiler
+.HP
+\fB\-D\fR, \fB\-\-ignore\-diagnostics\fR [code] Ignore TypeScript warnings by diagnostic code
+.TP
+\fB\-O\fR, \fB\-\-compiler\-options\fR [opts]
+JSON object to merge with compiler options
+.TP
+\fB\-\-dir\fR
+Specify working directory for config resolution
+.TP
+\fB\-\-scope\fR
+Scope compiler to files within `cwd` only
+.TP
+\fB\-\-files\fR
+Load `files`, `include` and `exclude` from `tsconfig.json` on startup
+.TP
+\fB\-\-pretty\fR
+Use pretty diagnostic formatter (usually enabled by default)
+.TP
+\fB\-\-skip\-project\fR
+Skip reading `tsconfig.json`
+.TP
+\fB\-\-skip\-ignore\fR
+Skip `\-\-ignore` checks
+.TP
+\fB\-\-prefer\-ts\-exts\fR
+Prefer importing TypeScript files over JavaScript files
+.TP
+\fB\-\-log\-error\fR
+Logs TypeScript errors to stderr instead of throwing exceptions
