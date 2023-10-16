@@ -2,23 +2,50 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: ts-node
 Upstream-Contact: Blake Embrey <hello@blakeembrey.com>
 Source: https://github.com/TypeStrong/ts-node
+ https://github.com/cspotcode/node-source-map-support/tags
+ https://registry.npmjs.org/@tsconfig/node10
+ https://registry.npmjs.org/@tsconfig/node12
+ https://registry.npmjs.org/@tsconfig/node14
+ https://registry.npmjs.org/@tsconfig/node16
+ https://registry.npmjs.org/@tsconfig/node18
+ https://github.com/cspotcode/v8-compile-cache-lib/tags
+Files-Excluded-cspotcode-source-map-support: amd-test/require.js
+ browser-source-map-support.js
+ test-fixtures/wasm
 
 Files: *
 Copyright: 2014 Blake Embrey
 License: Expat
 
-Files: debian/*
-Copyright: 2020 Julien Puydt <jpuydt@debian.org>
- 2020 Xavier Guimard <yadd@debian.org>
+Files: cspotcode-source-map-support/*
+Copyright: 2014 Evan Wallace
 License: Expat
 
-Files: debian/tests/test_modules/*
-Copyright: 2014-2020 Jordan Harband
+Files: debian/*
+Copyright: 2020 Julien Puydt <jpuydt@debian.org>
+ 2020-2022 Yadd <yadd@debian.org>
 License: Expat
 
 Files: debian/tests/test_modules/typescript-json-schema/*
 Copyright: 2016 typescript-json-schema contributors
 License: BSD-3-Clause
+
+Files: dist-raw/*
+Copyright: Joyent, Inc.
+ other Node contributors
+License: Expat
+
+Files: tsconfig-node*/*
+Copyright: Microsoft Corporation
+License: Expat
+
+Files: v8-compile-cache-lib/*
+Copyright: 2019 Andres Suarez
+License: Expat
+
+Files: website/src/theme/DocBreadcrumbs/styles.module.css
+Copyright: Facebook, Inc. and its affiliates
+License: Expat
 
 License: BSD-3-Clause
  Redistribution and use in source and binary forms, with or without

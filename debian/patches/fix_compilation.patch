@@ -1,47 +1,78 @@
 Description: allow compilation with Debian tools
 Author: Julien Puydt
-Forwarded: Debian-specific
+Forwarded: not-needed
+Reviewed-By: Yadd <yadd@debian.org>
+Last-Update: 2022-06-09
 
---- a/tsconfig.json
-+++ b/tsconfig.json
-@@ -12,6 +12,25 @@
-     "sourceMap": true,
-     "inlineSources": true,
-     "types": ["node", "mocha"],
-+    "typeRoots": ["/usr/share/nodejs/@types"],
-+    "baseUrl": ".",
-+    "paths": {
-+	    "arg": ["/usr/share/nodejs/arg"],
-+	    "chai": ["/usr/share/nodejs/@types/chai"],
-+	    "create-require": ["/usr/share/nodejs/create-require"],
-+	    "diff": ["/usr/share/nodejs/@types/diff"],
-+	    "get-stream": ["/usr/share/nodejs/get-stream"],
-+	    "glob": ["/usr/share/nodejs/@types/glob"],
-+	    "make-error": ["/usr/share/nodejs/make-error"],
-+	    "minimatch": ["/usr/share/nodejs/@types/minimatch"],
-+	    "proxyquire": ["/usr/share/nodejs/proxyquire"],
-+	    "rimraf": ["/usr/share/nodejs/@types/rimraf"],
-+	    "semver": ["/usr/share/nodejs/@types/semver"],
-+	    "source-map": ["/usr/share/nodejs/source-map"],
-+	    "source-map-support": ["/usr/share/nodejs/source-map-support"],
-+	    "typescript": ["/usr/share/nodejs/typescript"],
-+	    "yn": ["/usr/share/nodejs/yn"]
-+    },
-     "stripInternal": true
-   },
-   "include": [
+--- a/src/child/spawn-child.ts
++++ b/src/child/spawn-child.ts
+@@ -47,6 +47,7 @@
+   process.on('SIGINT', sendSignalToChild);
+   process.on('SIGTERM', sendSignalToChild);
+   function sendSignalToChild(signal: string) {
++// @ts-ignore
+     process.kill(child.pid, signal);
+   }
+ }
 --- a/src/index.ts
 +++ b/src/index.ts
-@@ -5,10 +5,10 @@
- import * as util from 'util'
- import { fileURLToPath } from 'url'
- import type * as _ts from 'typescript'
--import { Module, createRequire as nodeCreateRequire, createRequireFromPath as nodeCreateRequireFromPath } from 'module'
-+import Module = require('module')
- import type _createRequire from 'create-require'
- // tslint:disable-next-line
--const createRequire = nodeCreateRequire ?? nodeCreateRequireFromPath ?? require('create-require') as typeof _createRequire
-+const createRequire = require('create-require') as typeof _createRequire
- 
- export { createRepl, CreateReplOptions, ReplService } from './repl'
- 
+@@ -829,12 +829,18 @@
+         path = normalizeSlashes(path);
+         return outputCache.get(path)?.content || '';
+       },
++// @ts-ignore
+       redirectConflictingLibrary: true,
+       onConflictingLibraryRedirect(
++// @ts-ignore
+         request,
++// @ts-ignore
+         parent,
++// @ts-ignore
+         isMain,
++// @ts-ignore
+         options,
++// @ts-ignore
+         redirectedRequest
+       ) {
+         debug(
+--- a/src/repl.ts
++++ b/src/repl.ts
+@@ -768,6 +768,7 @@
+  */
+ export function setupContext(
+   context: any,
++// @ts-ignore
+   module: Module,
+   filenameAndDirname: 'eval' | 'stdin' | null
+ ) {
+--- a/src/resolver-functions.ts
++++ b/src/resolver-functions.ts
+@@ -195,6 +195,7 @@
+             host,
+             redirectedReference,
+             undefined,
++// @ts-ignore
+             mode
+           );
+         if (typeDirectiveName === 'node' && !resolvedTypeReferenceDirective) {
+--- a/src/util.ts
++++ b/src/util.ts
+@@ -1,5 +1,6 @@
+ import {
+   createRequire as nodeCreateRequire,
++// @ts-ignore
+   createRequireFromPath as nodeCreateRequireFromPath,
+ } from 'module';
+ import type _createRequire from 'create-require';
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -29,6 +29,9 @@
+   "include": [
+     "src/**/*"
+   ],
++  "exclude": [
++    "src/test/**/*"
++  ],
+   "typedocOptions": {
+     "entryPoints": ["./src/index.ts"],
+     "readme": "none",

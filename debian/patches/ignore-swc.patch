@@ -1,0 +1,16 @@
+Description: ignore @swc/*
+ @swc/wasm isn't available for now
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2022-03-09
+
+--- a/src/transpilers/swc.ts
++++ b/src/transpilers/swc.ts
+@@ -1,5 +1,7 @@
+ import type * as ts from 'typescript';
++// @ts-ignore
+ import type * as swcWasm from '@swc/wasm';
++// @ts-ignore
+ import type * as swcTypes from '@swc/core';
+ import type { CreateTranspilerOptions, Transpiler } from './types';
+ import type { NodeModuleEmitKind } from '..';

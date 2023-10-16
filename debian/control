@@ -3,25 +3,38 @@ Section: javascript
 Priority: optional
 Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
 Uploaders: Julien Puydt <jpuydt@debian.org>
-Build-Depends: chai
- , debhelper-compat (= 13)
+Build-Depends:
+ debhelper-compat (= 13)
  , dh-sequence-nodejs
+ , chai
  , mocha <!nocheck>
- , node-arg <!nocheck>
- , node-axios <!nocheck>
- , node-create-require <!nocheck>
+ , node-ampproject-remapping
+ , node-acorn
+ , node-arg
+ , node-axios
+ , node-browserify
+ , node-builtin-modules
+ , node-call-bind <!nocheck>
+ , node-create-require
+ , node-diff
+ , node-get-stream
  , node-es-abstract <!nocheck>
+ , node-get-intrinsic <!nocheck>
+ , node-is-regex <!nocheck>
  , node-json-stable-stringify
- , node-make-error <!nocheck>
+ , node-make-error
+ , node-object.getownpropertydescriptors <!nocheck>
  , node-proxyquire <!nocheck>
  , node-react <!nocheck>
  , node-rimraf <!nocheck>
  , node-semver
- , node-source-map-support <!nocheck>
  , node-typescript
- , node-typescript-types
- , node-yn <!nocheck>
-Standards-Version: 4.5.1
+ , node-types-react
+ , node-util.promisify <!nocheck>
+ , node-yargs
+ , node-yn
+ , terser
+Standards-Version: 4.6.1
 Vcs-Browser: https://salsa.debian.org/js-team/ts-node
 Vcs-Git: https://salsa.debian.org/js-team/ts-node.git
 Homepage: https://github.com/TypeStrong/ts-node
@@ -30,15 +43,20 @@ Rules-Requires-Root: no
 
 Package: ts-node
 Architecture: all
-Depends: ${misc:Depends}
+Depends:
+ ${misc:Depends}
+ , node-acorn
+ , node-ampproject-remapping
  , node-arg
+ , node-builtin-modules
  , node-create-require
  , node-diff
  , node-make-error
- , node-source-map-support
+ , node-typescript
  , node-yn
- , nodejs
-Provides: ${nodejs:Provides}
+ , nodejs:any
+Provides:
+ ${nodejs:Provides}
 Multi-Arch: foreign
 Description: TypeScript execution and language shell
  Provides a command-line interface to execute TypeScript code

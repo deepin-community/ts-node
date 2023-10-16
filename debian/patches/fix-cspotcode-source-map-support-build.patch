@@ -1,0 +1,69 @@
+Description: don't use network minifier
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2022-06-09
+
+--- a/cspotcode-source-map-support/build.js
++++ b/cspotcode-source-map-support/build.js
+@@ -5,9 +5,7 @@
+ var querystring = require('querystring');
+ var child_process = require('child_process');
+ 
+-var browserify = path.resolve(path.join('node_modules', '.bin', 'browserify'));
+-var webpack = path.resolve(path.join('node_modules', '.bin', 'webpack'));
+-var coffee = path.resolve(path.join('node_modules', '.bin', 'coffee'));
++var browserify = 'browserify';
+ 
+ function run(command, callback) {
+   console.log(command);
+@@ -33,47 +31,9 @@
+   ].join('\n');
+ 
+   // Use the online Google Closure Compiler service for minification
+-  fs.writeFileSync('.temp.js', querystring.stringify({
+-    compilation_level: 'SIMPLE_OPTIMIZATIONS',
+-    output_info: 'compiled_code',
+-    output_format: 'text',
+-    js_code: code
+-  }));
+-  run('curl -d @.temp.js "https://closure-compiler.appspot.com/compile"', function(error, stdout) {
++  fs.writeFileSync('.temp.js', code);
++  run('terser .temp.js', function(error, stdout) {
+     if (error) throw error;
+-    var code = header + '\n' + stdout;
+-    fs.unlinkSync('.temp.js');
+-    fs.writeFileSync('browser-source-map-support.js', code);
+-    fs.writeFileSync('amd-test/browser-source-map-support.js', code);
++    fs.writeFileSync('browser-source-map-support.js', header+stdout);
+   });
+ });
+-
+-// Build the AMD test
+-run(coffee + ' --map --compile amd-test/script.coffee', function(error) {
+-  if (error) throw error;
+-});
+-
+-// Build the browserify test
+-run(coffee + ' --map --compile browserify-test/script.coffee', function(error) {
+-  if (error) throw error;
+-  run(browserify + ' --debug browserify-test/script.js > browserify-test/compiled.js', function(error) {
+-    if (error) throw error;
+-  })
+-});
+-
+-// Build the browser test
+-run(coffee + ' --map --compile browser-test/script.coffee', function(error) {
+-  if (error) throw error;
+-});
+-
+-// Build the header test
+-run(coffee + ' --map --compile header-test/script.coffee', function(error) {
+-  if (error) throw error;
+-  var contents = fs.readFileSync('header-test/script.js', 'utf8');
+-  fs.writeFileSync('header-test/script.js', contents.replace(/\/\/# sourceMappingURL=.*/g, ''))
+-});
+-
+-// Build the webpack test
+-child_process.exec(webpack, {cwd: 'webpack-test'}, function(error) {
+-  if (error) throw error;
+-});

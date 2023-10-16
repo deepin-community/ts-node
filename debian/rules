@@ -4,10 +4,10 @@
 	dh $@
 
 override_dh_auto_build:
-	tsc
-	rm dist/*deprecated*
+	dh_auto_build --buildsystem=nodejs
+	tsc -b ./tsconfig.build-dist.json
 	chmod +x dist/bin*.js
-#	./debian/tests/test_modules/typescript-json-schema/bin/typescript-json-schema \
+	./debian/tests/test_modules/typescript-json-schema/bin/typescript-json-schema \
 		--topRef --refs --validationKeywords allOf \
 		--out tsconfig.schema.json tsconfig.json TsConfigSchema
 	node --require ./register ./scripts/create-merged-schema
@@ -16,3 +16,4 @@ override_dh_auto_build:
 override_dh_fixperms:
 	dh_fixperms
 	chmod +x `find debian -name "bin*.js"`
+	chmod -x `find debian -name "*.d.ts"`

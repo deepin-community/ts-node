@@ -1,0 +1,15 @@
+Description: don't install LICENSE
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2022-07-17
+
+--- a/package.json
++++ b/package.json
+@@ -46,7 +46,6 @@
+     "/transpilers/",
+     "/dist/",
+     "!/dist/test",
+-    "/dist-raw/NODE-LICENSE.md",
+     "/dist-raw/**.js",
+     "/register/",
+     "/esm/",

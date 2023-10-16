@@ -1,6 +1,10 @@
 dist/
+cspotcode-source-map-support/.temp.js
+cspotcode-source-map-support/browser-source-map-support.js
 node_modules/
+temp/
 tests/node_modules/
 tests/ts-node-packed.tgz
 tsconfig.schema.json
 tsconfig.schemastore-schema.json
+tsconfig.tsbuildinfo

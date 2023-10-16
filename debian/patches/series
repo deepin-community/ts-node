@@ -1,3 +1,6 @@
+#use-debian-libs.patch
 fix_compilation.patch
-fix-test.patch
-uniontech001_annotation_error.patch
+ignore-swc.patch
+fix-cspotcode-source-map-support-build.patch
+skip-network-connection-during-build.patch
+clean-install.patch

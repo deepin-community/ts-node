@@ -1,0 +1,42 @@
+Description: skip network connection
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2022-06-09
+
+--- a/scripts/create-merged-schema.ts
++++ b/scripts/create-merged-schema.ts
+@@ -8,11 +8,12 @@
+ 
+ import axios from 'axios';
+ import { resolve } from 'path';
+-import { writeFileSync } from 'fs';
++import { writeFileSync, readFileSync } from 'fs';
+ 
+ async function main() {
+   /** schemastore definition */
+-  const schemastoreSchema = await getSchemastoreSchema();
++// @ts-ignore
++  const schemastoreSchema = JSON.parse(readFileSync('debian/tsconfig.json'));
+ 
+   /** ts-node schema auto-generated from ts-node source code */
+   const originalTsNodeSchema = require('../tsconfig.schema.json');
+@@ -39,6 +40,7 @@
+     ...schemastoreSchema,
+     definitions: {
+       ...Object.fromEntries(
++// @ts-ignore
+         Object.entries(schemastoreSchema.definitions).filter(
+           ([key]) => !key.startsWith(tsnodeDefinitionPrefix)
+         )
+@@ -73,9 +75,11 @@
+   };
+   // Splice into the allOf array at a spot that looks good.  Does not affect
+   // behavior of the schema, but looks nicer if we want to submit as a PR to schemastore.
++// @ts-ignore
+   mergedSchema.allOf = mergedSchema.allOf.filter(
+     (item: any) => !item.$ref?.includes('tsNode')
+   );
++// @ts-ignore
+   mergedSchema.allOf.splice(mergedSchema.allOf.length - 1, 0, {
+     $ref: '#/definitions/tsNodeDefinition',
+   });
