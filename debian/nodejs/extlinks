@@ -1,4 +1,10 @@
+arg
 axios
-semver
+builtin-modules
+create-require
+@jridgewell/trace-mapping
+make-error
+typescript
+@types/diff
 @types/node
-@types/react
+yn

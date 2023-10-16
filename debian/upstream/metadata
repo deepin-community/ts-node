@@ -3,3 +3,4 @@ Bug-Database: https://github.com/TypeStrong/ts-node/issues
 Bug-Submit: https://github.com/TypeStrong/ts-node/issues/new
 Repository: https://github.com/TypeStrong/ts-node.git
 Repository-Browse: https://github.com/TypeStrong/ts-node
+Security-Contact: https://github.com/TypeStrong/ts-node/tree/HEAD/SECURITY.md

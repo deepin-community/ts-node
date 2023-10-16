@@ -1,0 +1,1 @@
+Until @swc/wasm isn't available, option --swc will fail

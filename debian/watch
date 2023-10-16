@@ -1,2 +1,35 @@
 version=4
-https://github.com/TypeStrong/ts-node/tags .*/archive/v?([\d\.]+).tar.gz
+opts=\
+dversionmangle=auto,\
+repacksuffix=+ds,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/@PACKAGE@-$1/ \
+ https://github.com/TypeStrong/ts-node/tags .*/v?([\d\.]+).tar.gz group
+
+opts="searchmode=plain,component=tsconfig-node10,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-tsconfig-node10-$1/" \
+ https://registry.npmjs.org/@tsconfig/node10 https://registry.npmjs.org/@tsconfig/node10/-/node10-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts="searchmode=plain,component=tsconfig-node12,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-tsconfig-node12-$1/" \
+ https://registry.npmjs.org/@tsconfig/node12 https://registry.npmjs.org/@tsconfig/node12/-/node12-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts="searchmode=plain,component=tsconfig-node14,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-tsconfig-node14-$1/" \
+ https://registry.npmjs.org/@tsconfig/node14 https://registry.npmjs.org/@tsconfig/node14/-/node14-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts="searchmode=plain,component=tsconfig-node16,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-tsconfig-node16-$1/" \
+ https://registry.npmjs.org/@tsconfig/node16 https://registry.npmjs.org/@tsconfig/node16/-/node16-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts="searchmode=plain,component=tsconfig-node18,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-tsconfig-node18-$1/" \
+ https://registry.npmjs.org/@tsconfig/node18 https://registry.npmjs.org/@tsconfig/node18/-/node18-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts=\
+component=v8-compile-cache-lib,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-v8-compile-cache-lib-$1/ \
+ https://github.com/cspotcode/v8-compile-cache-lib/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+component=cspotcode-source-map-support,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-node-source-map-support-$1/ \
+ https://github.com/cspotcode/node-source-map-support/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
